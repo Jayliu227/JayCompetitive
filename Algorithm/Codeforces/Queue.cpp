@@ -25,15 +25,33 @@ const int INF = (int) 1e9;
 const int MODULO = (int) 1e10 + 7;
 const int maxn = (int) 1e4;
 
+int q[100000];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     int start_s = clock();
     
-
+    RI(n);
+    forn(i, n){
+        RI(in);
+        q[i] = in;
+    }
     
+    sort(q, q + n);
+    
+    ll sum = 0;
+    int res = 0;
+    forn(i, n){
+        if(sum <= q[i]){
+            res++;
+            sum += q[i];
+        }
+    }
+    
+    cout << res << endl;
     
     int stop_s = clock();
-    cerr << "time lapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
+    //cerr << "time lapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
     return 0;
 }

@@ -5,11 +5,9 @@
 #define se second
 #define mp make_pair
 #define REP(i,s,t) for(int i = (s); i < (int)t; i++)
-#define RI(x) int (x); cin >> (x)
 #define forn(i,n) for(int i = 0; i < (int)n; i++)
 #define for1(i,n) for(int i = 1; i < (int)n; i++)
 #define FILL(x,v) memset(x,v,sizeof(x))
-#define ALL(x) (x).begin(), (x).end()
 #define endl '\n'
 
 using namespace std;
@@ -28,12 +26,30 @@ const int maxn = (int) 1e4;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
+//=======GET INPUT HERE============
+    int n; cin >> n;
+    vii s;
+    forn(i, n){
+        int a, b; cin >> a >> b;
+        s.pb(mp(a,b));
+    }
+//=======FINISHED INPUT============        
     int start_s = clock();
-    
+//=======CODE GOES HERE============
+    sort(s.begin(), s.end());
 
+    int head = 0;
+    forn(i, s.size()){
+        if(s[i].se >= head){
+            head = s[i].se;
+        }else{
+            head = s[i].fi;
+        }
+    }
     
-    
+    cout << head << endl;
+//=======CODE ENDS HERE============    
     int stop_s = clock();
-    cerr << "time lapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
+    //cerr << "time lapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
     return 0;
 }
