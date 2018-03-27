@@ -14,12 +14,6 @@
 
 using namespace std;
 
-void LOG(string s){
-#ifdef LOCAL_COMPILATION
-    cout << "DEBUG: " << s << endl;
-#endif
-}
-
 typedef pair<int,int> pii;
 typedef vector<int> vi;
 typedef vector<pii> vii;
@@ -31,17 +25,34 @@ const int INF = (int) 1e9;
 const int MODULO = (int) 1e10 + 7;
 const int maxn = (int) 1e4;
 
+int arr[100010];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-#ifdef LOCAL_COMPILATION    
     int start_s = clock();
-#endif    
     
+    ll mx = 0;
+    ll sum = 0;
     
-#ifdef LOCAL_COMPILATION    
+    RI(x);
+    forn(i, x){
+        cin >> arr[i];
+    }
+    
+    sum = arr[0];
+    mx = arr[0];
+    for(int i = 1; i < x; i++){
+        if(arr[i] > arr[i - 1]){
+            sum += arr[i] - arr[i - 1];
+        }else{
+            sum -= arr[i - 1] - arr[i];
+        }
+        mx = max(mx, sum);
+    }
+    
+    cout << mx << endl;
     int stop_s = clock();
-    cerr << "time lapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
-#endif    
+    //cerr << "time lapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
     return 0;
 }

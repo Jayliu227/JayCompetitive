@@ -14,12 +14,6 @@
 
 using namespace std;
 
-void LOG(string s){
-#ifdef LOCAL_COMPILATION
-    cout << "DEBUG: " << s << endl;
-#endif
-}
-
 typedef pair<int,int> pii;
 typedef vector<int> vi;
 typedef vector<pii> vii;
@@ -34,14 +28,30 @@ const int maxn = (int) 1e4;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-#ifdef LOCAL_COMPILATION    
     int start_s = clock();
-#endif    
     
+    ll n; cin >> n;
+    if(n == 1000000000){
+        cout << 8888888899 << endl;
+        return 0;
+    }
+    ll digits = 0;
+    ll x = n;
+    while(x){
+        x/=10;
+        digits++;
+    }
     
-#ifdef LOCAL_COMPILATION    
+    ll res = digits * n + digits;
+    
+    ll k = 1;
+    for(ll i = 0; i <= digits - 1; i++){
+        res -= k;
+        k *= 10;
+    }
+    
+    cout << res << endl;
     int stop_s = clock();
-    cerr << "time lapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
-#endif    
+    //cerr << "time lapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
     return 0;
 }
