@@ -38,6 +38,7 @@ void articulationPointAndBridge(int u){
             }
             dfs_low[u] = min(dfs_low[u], dfs_low[v]);
         }else if(v != dfs_parent[u]){
+            // back edge here
             dfs_low[u] = min(dfs_low[u], dfs_low[v]);
         }
     } 

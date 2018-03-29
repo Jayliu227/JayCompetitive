@@ -37,7 +37,34 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
+    string n; cin >> n;
+    bool ok = false;
+    int index = -1;
+    for(int i = 0; i < n.size() - 1; i++){
+        if((n[i] - '0') % 2 == 0){
+            ok = true;
+            if((n[i] - '0') < (n[n.size() - 1] - '0')){
+                int temp = n[i];
+                n[i] = n[n.size() - 1];
+                n[n.size() - 1] = temp;
+                
+                cout << n << endl;
+                return 0;
+            }else{
+                index = i;
+            }
+        }
+    }
     
+    if(!ok){
+        cout << -1 << endl;
+    }else{
+        int temp = n[index];
+        n[index] = n[n.size() - 1];
+        n[n.size() - 1] = temp;
+                
+        cout << n << endl;
+    }
     
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();

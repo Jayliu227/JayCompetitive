@@ -31,13 +31,37 @@ const int INF = (int) 1e9;
 const int MODULO = (int) 1e10 + 7;
 const int maxn = (int) 1e4;
 
+// left more than right
+int lft[100010];
+int rht[100010];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
+    RI(n);
     
+    ll lf = 0, rt = 0;
+    int l, r;
+    forn(i, n){
+        cin >> l >> r;
+        lf += l, rt += r;
+        lft[i] = l, rht[i] = r;   
+    }
+    
+    int mx = abs(lf - rt);
+    
+    int index = -1;
+    forn(i, n){
+        int d = abs((lf - lft[i] + rht[i]) - (rt - rht[i] + lft[i]));
+        if(d > mx){
+            mx = d;
+            index = i;
+        }
+    }   
+    cout << index + 1 << endl;
     
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();

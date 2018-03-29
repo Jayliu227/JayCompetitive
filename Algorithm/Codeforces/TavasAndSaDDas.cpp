@@ -37,11 +37,32 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
+    RI(n);
+    ll ans = 0;
+    int digits = 0;
+    // the binary itself
+    while(n){
+        if(n % 10 == 7) ans += (1 << digits);
+        n /= 10;
+        digits++;
+    }
     
+    // all numbers before it, every digits have 2 possibility.
+    for(int i = 1; i < digits; i++){
+        ans += (1 << i);
+    }
     
+    cout << ans + 1 << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time lapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
 #endif    
     return 0;
 }
+
+
+
+
+
+
+

@@ -31,13 +31,48 @@ const int INF = (int) 1e9;
 const int MODULO = (int) 1e10 + 7;
 const int maxn = (int) 1e4;
 
+/*
+    Andre Nicolas:
+        c(n, k) = (n/k) c(n - 1, k - 1)
+*/
+
+int c(int n, int k){    
+    if(k == 0){
+        return 1;
+    }
+    if(k > n / 2){
+        return c(n, n - k);
+    }
+    return n * c(n - 1, k - 1) / k;
+}
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
+    cout.precision(10);
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
+    string s1, s2;
+    cin >> s1; cin >> s2;
+    int ps = 0, qs = 0, ms = 0;
+    for(int i = 0; i < s1.size(); i++){
+        ps += s1[i] == '+';
+        ps -= s2[i] == '+';
+        ms += s1[i] == '-';
+        ms -= s2[i] == '-';
+        
+        qs += s2[i] == '?';
+    }     
+
+    if(ms < 0 || ps < 0){
+        cout << 0 << endl;
+        return 0;
+    }
     
+    int res = pow(2, qs);
+    
+    cout << c(qs, ps) / (double) res << endl;
     
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
@@ -45,3 +80,8 @@ int main(){
 #endif    
     return 0;
 }
+
+
+
+
+

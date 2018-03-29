@@ -37,7 +37,18 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
+    RI(n); RI(m);
+    LOG(n - m), LOG(m);
+    if(n == 1 && m == 1){
+        cout << 1 << endl;
+        return 0;
+    }
     
+    if(n - m > m - 1){
+        cout << m + 1 << endl;
+    }else{
+        cout << m - 1 << endl;
+    }
     
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();

@@ -14,7 +14,7 @@
 
 using namespace std;
 
-template<class T> void LOG(T s){
+void LOG(string s){
 #ifdef LOCAL_COMPILATION
     cout << "DEBUG: " << s << endl;
 #endif
@@ -37,7 +37,12 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
+    int r, x, y, x1, y1;
+    cin >> r >> x >> y >> x1 >> y1;
+
+    double dist = sqrt(pow(abs(x - x1), 2) + pow(abs(y - y1), 2));
     
+    cout << ceil(dist / (r * 2)) << endl;
     
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
