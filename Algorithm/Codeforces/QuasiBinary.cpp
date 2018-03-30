@@ -36,7 +36,30 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
+    RI(n);
+    vector<int> res;
+    while(n){
+        int c = n, b = 0, p = 1;
+        while(c){
+            if(c % 10) b += p;
+            c /= 10;
+            p *= 10;
+        }
+        LOG(b);
+        res.pb(b);
+        n -= b;
+    }        
+    
+    cout << res.size() << endl;
+    sort(ALL(res));
+    for(int i = 0; i < res.size(); i++){
+        if(i == 0){
+            cout << res[i];
+        }else{
+            cout << " " << res[i];
+        }
+    }
+    cout << endl;
 
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
@@ -44,3 +67,9 @@ int main(){
 #endif    
     return 0;
 }
+
+
+
+
+
+

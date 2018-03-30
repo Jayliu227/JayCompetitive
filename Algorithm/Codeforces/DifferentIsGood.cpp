@@ -36,7 +36,19 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
+    RI(n);
+    if(n > 26){
+        cout << -1 << endl;
+        return 0;
+    }        
+    
+    set<char> s;
+    forn(i, n){
+        char c; cin >> c;
+        s.insert(c);
+    }
+    
+    cout << (n - s.size()) << endl;
 
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
@@ -44,3 +56,12 @@ int main(){
 #endif    
     return 0;
 }
+
+
+
+
+
+
+
+
+

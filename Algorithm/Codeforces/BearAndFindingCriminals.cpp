@@ -29,6 +29,8 @@ typedef long long ll;
 const int INF = (int) 1e9;
 const int MODULO = (int) 1e10 + 7;
 
+int cities[110];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -36,11 +38,33 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
+    RI(n); RI(p);    
+    forn(i, n){
+        cin >> cities[i];
+    }
+    
+    int res = cities[--p];
+    int d = 1;
+    int ds = min(p, n - p - 1);
+    for(int i = 0; i < ds; i++){
+        res += (cities[p - d] == 1 && cities[p + d] == 1) ? 2 : 0;
+        d++;
+    }
 
+    if(p - d == -1){
+        for(int i = p + d; i < n; i++) res += cities[i];
+    }else{
+        for(int i = p - d; i >= 0; i--) res += cities[i];
+    }
+    
+    cout << res << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
 #endif    
     return 0;
 }
+
+
+
+

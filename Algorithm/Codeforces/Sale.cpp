@@ -29,18 +29,31 @@ typedef long long ll;
 const int INF = (int) 1e9;
 const int MODULO = (int) 1e10 + 7;
 
+int TV[100];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    cout.precision(10);
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
+    RI(n); RI(m);
+    forn(i, n){
+        cin >> TV[i];
+    }
 
+    sort(TV, TV + n);
+    
+    int res = 0;
+    for(int i = 0; i < n; i++){
+        if(TV[i] > 0 || m <= 0) break;
+        res += -TV[i];
+        m--;
+    }
+    cout << res << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
-    cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
+    cerr << "time lapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
 #endif    
     return 0;
 }

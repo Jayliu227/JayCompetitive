@@ -29,6 +29,8 @@ typedef long long ll;
 const int INF = (int) 1e9;
 const int MODULO = (int) 1e10 + 7;
 
+vii friends;
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -36,8 +38,26 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
-
+    RI(n); RI(d);
+    int m, f;
+    forn(i, n){
+        cin >> m >> f;
+        friends.pb(mp(m, f));
+    }    
+    
+    sort(ALL(friends));
+    
+    ll res = 0;
+    ll cur = 0;
+    int j = 0;
+    
+    for(int i = 0; i < friends.size(); i++){
+        cur += friends[i].se;
+        while(friends[i].fi - friends[j].fi >= d){ cur -= friends[j].se; j++;}
+        res = max(res, cur);
+    }
+    
+    cout << res << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
