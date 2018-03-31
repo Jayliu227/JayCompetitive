@@ -27,7 +27,9 @@ typedef vector<vi> vvi;
 typedef long long ll;
 
 const int INF = (int) 1e9;
-const int MODULO = (int) 1e9 + 7;
+const int MODULO = (int) 1e10 + 7;
+
+vii trees;
 
 int main(){
     ios::sync_with_stdio(false);
@@ -36,11 +38,40 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
-
+    RI(n); int p, h;
+    forn(i, n){
+        cin >> p >> h;
+        trees.pb(mp(p,h));
+    }    
+    
+    int res = 1;
+    int left = trees[0].fi;
+    for1(i, n){
+        if(trees[i].fi - trees[i].se > left){
+            res++;
+            left = trees[i].fi;
+        }else if(i == n - 1 || trees[i].fi + trees[i].se < trees[i + 1].fi){
+            res++;
+            left = trees[i].fi + trees[i].se;
+        }else{
+            left = trees[i].fi;
+        }
+    }
+    
+    cout << res << endl;
+    
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
 #endif    
     return 0;
 }
+
+
+
+
+
+
+
+
+

@@ -27,7 +27,9 @@ typedef vector<vi> vvi;
 typedef long long ll;
 
 const int INF = (int) 1e9;
-const int MODULO = (int) 1e9 + 7;
+const int MODULO = (int) 1e10 + 7;
+
+int w[26];
 
 int main(){
     ios::sync_with_stdio(false);
@@ -36,8 +38,22 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
+    string s; cin >> s;
+    RI(k);
+    int mx = 0;
+    forn(i, 26){
+        cin >> w[i];
+        mx = max(mx, w[i]);
+    }        
 
+    int res = 0;
+    int j = 1;
+    for(auto i : s){
+        res += w[i - 'a'] * (j++);
+    }
+    forn(i, k){ res += mx * (j++);}
+    
+    cout << res << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

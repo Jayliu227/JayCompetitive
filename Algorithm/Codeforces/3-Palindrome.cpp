@@ -27,7 +27,7 @@ typedef vector<vi> vvi;
 typedef long long ll;
 
 const int INF = (int) 1e9;
-const int MODULO = (int) 1e9 + 7;
+const int MODULO = (int) 1e10 + 7;
 
 int main(){
     ios::sync_with_stdio(false);
@@ -36,8 +36,23 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
-
+    RI(n);
+    
+    int sn = n / 4;
+    int ssn = n % 4;
+    
+    forn(i,sn){
+        cout << "aabb";
+    }
+    
+    if(ssn == 1){
+        cout << "a" << endl;
+    }else if(ssn == 2){
+        cout << "aa" << endl;
+    }else if(ssn == 3){
+        cout << "aab" << endl;
+    }
+    
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

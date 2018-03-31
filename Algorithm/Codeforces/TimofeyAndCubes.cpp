@@ -27,7 +27,9 @@ typedef vector<vi> vvi;
 typedef long long ll;
 
 const int INF = (int) 1e9;
-const int MODULO = (int) 1e9 + 7;
+const int MODULO = (int) 1e10 + 7;
+
+int cubes[300000];
 
 int main(){
     ios::sync_with_stdio(false);
@@ -36,11 +38,29 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
+    RI(n);
+    forn(i,n) cin >> cubes[i];            
 
+    for(int i = 0; i < n/2; i+=2){
+        swap(cubes[i], cubes[n - 1 - i]);
+    }
+    
+    forn(i,n){
+        if(i == 0){
+            cout << cubes[i];
+        }else{
+            cout << " " << cubes[i];
+        }
+    }
+    cout << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
 #endif    
     return 0;
 }
+
+
+
+
+

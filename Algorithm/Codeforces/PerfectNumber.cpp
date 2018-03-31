@@ -27,7 +27,16 @@ typedef vector<vi> vvi;
 typedef long long ll;
 
 const int INF = (int) 1e9;
-const int MODULO = (int) 1e9 + 7;
+const int MODULO = (int) 1e10 + 7;
+
+bool sum(int n){
+    int s = 0;
+    while(n){
+        s += n % 10;
+        n /= 10;
+    }
+    return s == 10;
+}
 
 int main(){
     ios::sync_with_stdio(false);
@@ -36,8 +45,15 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
-
+    RI(k);
+    int ans = 19;
+    int i = 1;
+    while(i < k){
+        ans++;
+        if(sum(ans)) i++;
+    }            
+    
+    cout << ans << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
