@@ -4,6 +4,8 @@
 #define fi first
 #define se second
 #define mp make_pair
+#define REP(i,s,t) for(int i = (s); i < (int)t; i++)
+#define RI(x) int (x); cin >> (x)
 #define forn(i,n) for(int i = 0; i < (int)n; i++)
 #define for1(i,n) for(int i = 1; i < (int)n; i++)
 #define FILL(x,v) memset(x,v,sizeof(x))
@@ -12,9 +14,7 @@
 
 using namespace std;
 
-inline int nxt(){ int x; cin >> x; return x; }
-
-template<class T> inline void LOG(T s){
+template<class T> void LOG(T s){
 #ifdef LOCAL_COMPILATION
     cout << "DEBUG: " << s << endl;
 #endif
@@ -28,6 +28,7 @@ typedef long long ll;
 
 const int INF = (int) 1e9;
 const int MODULO = (int) 1e9 + 7;
+int w[101];
 
 int main(){
     ios::sync_with_stdio(false);
@@ -36,8 +37,22 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
+    int n, m; cin >> n;
+    forn(i, n) cin >> w[i];
+    cin >> m;
+    forn(i, m){
+        int x, y; cin >> y >> x;        
+        y--;
+        int down = x - 1;
+        int up = w[y] - down - 1;
+        w[y] = 0;
+        if(y - 1 >= 0) w[y - 1] += down;
+        if(y + 1 <= n - 1) w[y + 1] += up;
+    }        
 
+    forn(i, n){
+        cout << w[i] << endl;
+    }
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

@@ -4,6 +4,8 @@
 #define fi first
 #define se second
 #define mp make_pair
+#define REP(i,s,t) for(int i = (s); i < (int)t; i++)
+#define RI(x) int (x); cin >> (x)
 #define forn(i,n) for(int i = 0; i < (int)n; i++)
 #define for1(i,n) for(int i = 1; i < (int)n; i++)
 #define FILL(x,v) memset(x,v,sizeof(x))
@@ -12,9 +14,7 @@
 
 using namespace std;
 
-inline int nxt(){ int x; cin >> x; return x; }
-
-template<class T> inline void LOG(T s){
+template<class T> void LOG(T s){
 #ifdef LOCAL_COMPILATION
     cout << "DEBUG: " << s << endl;
 #endif
@@ -36,8 +36,16 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
-
+    RI(n);
+    int res = 0;
+    unordered_map<string, int> m;
+    string s;
+    forn(i, n){
+        cin >> s;
+        ++m[s];
+        res = max(res, m[s]);
+    }        
+    cout << res << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
