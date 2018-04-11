@@ -20,15 +20,23 @@ template<class T> inline void LOG(T s){
 #endif
 }
 
-typedef pair<int,int> ii;
+typedef pair<int,int> pii;
 typedef vector<int> vi;
-typedef vector<ii> vii;
+typedef vector<pii> vii;
 typedef vector<vi> vvi;
-typedef vector<vii> vvii;
 typedef long long ll;
+
+/*
+    let the occurence of a number be c;
+    then there should be at least c - 1 that many elements different from the number
+    so n = c + c - 1 if there is only two elements;
+    n >= c + c - 1 if there are more, so 2c - 1 > n would make it impossible to get
+    a permutation as required. thus for all c, c <= (n + 1)/2;
+*/
 
 const int INF = (int) 1e9;
 const int MODULO = (int) 1e9 + 7;
+int a[1005];
 
 int main(){
     ios::sync_with_stdio(false);
@@ -37,8 +45,19 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
-
+    int n = nxt();
+    FILL(a, 0);
+    forn(i, n){
+        int k = nxt();
+        a[k]++;
+    }        
+    forn(i, 1005){
+        if(a[i] > ((n + 1)/2)){
+            cout << "NO" << endl;
+            return 0;
+        }
+    }
+    cout << "YES" << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

@@ -20,15 +20,17 @@ template<class T> inline void LOG(T s){
 #endif
 }
 
-typedef pair<int,int> ii;
+typedef pair<int,int> pii;
 typedef vector<int> vi;
-typedef vector<ii> vii;
+typedef vector<pii> vii;
 typedef vector<vi> vvi;
-typedef vector<vii> vvii;
 typedef long long ll;
 
 const int INF = (int) 1e9;
 const int MODULO = (int) 1e9 + 7;
+
+vector<int> p;
+vi composite;
 
 int main(){
     ios::sync_with_stdio(false);
@@ -37,8 +39,27 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
-
+    int n = nxt();        
+    composite.resize(n + 1);
+    for(int i = 0; i < n + 1; i++) composite[i] = false;
+    
+    for(int i = 2; i < n + 1; i++) if(composite[i] == false){
+        p.pb(i);
+        for(int j = i * 2; j < n + 1; j += i){
+            composite[j] = true;
+        }
+    }
+    
+    int res = 0;
+    for(int i = 2; i <= n; i++){
+        if(composite[i] == false)
+            continue;
+        int ps = 0;
+        for(auto j : p) ps += (i % j == 0);
+        res += ps == 2;                    
+    }
+    
+    cout << res << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

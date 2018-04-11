@@ -37,8 +37,24 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
+    int m, n; int a, b, c, d;
+    cin >> m >> n;
+    cin >> a >> b;
+    cin >> c >> d;
 
+    bool ok = false;
+    
+    if((a + d) <= n && (max(b, c) <= m)) ok = true;
+    if((a + c) <= n && (max(b, d) <= m)) ok = true;
+    if((b + c) <= m && (max(a, d) <= n)) ok = true;
+    if((b + d) <= m && (max(a, c) <= n)) ok = true;
+    
+    if((b + d) <= n && (max(a, c) <= m)) ok = true;
+    if((b + c) <= n && (max(a, d) <= m)) ok = true;
+    if((a + c) <= m && (max(b, d) <= n)) ok = true;
+    if((a + d) <= m && (max(b, c) <= n)) ok = true;
+    
+    cout << (ok? "YES" : "NO") << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

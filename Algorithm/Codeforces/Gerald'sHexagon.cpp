@@ -37,8 +37,10 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-        
+    int a, b, c, d, e, f;
+    cin >> a >> b >> c >> d >> e >> f;        
 
+    cout << ((a + b + c) * (a + b + c) - a * a - c * c - e * e) << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
