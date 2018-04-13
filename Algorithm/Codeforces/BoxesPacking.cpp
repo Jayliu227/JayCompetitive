@@ -38,8 +38,28 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-            
+    int n = nxt();
+    int a[n];
+    forn(i,n) cin >> a[i];
+    sort(a, a + n);
+    vector<int> slots;
+    for(int i = n - 1; i >= 0; i--){
+        if(slots.empty()){
+            slots.pb(a[i]);
+        }else{
+            int j = 0;
+            for(; j < slots.size(); j++){
+                if(slots[j] > a[i]){
+                    slots[j] = a[i];
+                    break;
+                }
+            }
+            if(j == slots.size()) slots.pb(a[i]);
+            sort(RALL(slots));
+        }
+    }            
 
+    cout << slots.size() << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

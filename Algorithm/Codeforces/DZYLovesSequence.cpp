@@ -38,14 +38,48 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-            
-
+    int n = nxt();
+    int l[n + 2], r[n + 2];
+    ll a[n + 2];
+    l[0] = l[n + 1] = r[0] = r[n + 1] = 0;    
+    a[0] = a[n + 1] = 0;    
+    int mx = 0;
+    for(int i = 1; i <= n; i++){ 
+        cin >> a[i];
+        if(a[i] > a[i - 1])
+            l[i] = l[i - 1] + 1;
+        else
+            l[i] = 1;            
+    }
+    
+    for(int i = n; i >= 1; i--){
+        if(a[i] < a[i + 1])
+            r[i] = r[i + 1] + 1;
+        else
+            r[i] = 1;
+    }             
+    
+    for(int i = 1; i < n + 1; i++){
+        if(a[i - 1] + 1 < a[i + 1]){
+            mx = max(mx, l[i - 1] + 1 + r[i + 1]);
+        }else{
+            mx = max(mx, l[i - 1] + 1);
+            mx = max(mx, r[i + 1] + 1);
+        }
+    }
+    cout << mx << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
 #endif    
     return 0;
 }
+
+
+
+
+
+
 
 
 

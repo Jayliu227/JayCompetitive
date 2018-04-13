@@ -38,8 +38,27 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-            
+    int n = nxt(); int q = nxt();
+    int delta[n];
+    int a[n];
+    forn(i, n) cin >> a[i];
+    sort(a, a + n);
+    FILL(delta, 0);
+    while(q--){
+        int s, e; cin >> s >> e;
+        s--, e--;
+        delta[s] += 1;
+        if(e + 1 < n)
+            delta[e + 1] -=1;
+    }        
 
+    for1(i, n) delta[i] += delta[i - 1];
+    sort(delta, delta + n);
+    ll ans = 0;
+    for(int i = n - 1; i >= 0; i--){
+        ans += (ll)((ll)delta[i] * (ll)a[i]);
+    }
+    cout << ans << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
