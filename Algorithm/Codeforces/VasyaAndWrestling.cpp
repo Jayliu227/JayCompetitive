@@ -38,7 +38,45 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-
+    vi a, b;
+    int n = nxt();
+    ll acc = 0;
+    int last;
+    forn(i, n){        
+        int m = nxt();
+        if(m > 0){
+            a.pb(m);
+        }else{
+            b.pb(-m);
+        }
+        
+        acc += m;
+        last = m;
+    }
+    
+    if(acc > 0){
+        cout << "first" << endl;
+    }else if(acc < 0){
+        cout << "second" << endl;
+    }else{
+        int i = 0;
+        for(; i < min(a.size(), b.size()); i++){
+            if(a[i] < b[i]){
+                cout << "second" << endl;
+                return 0;
+            }else if(a[i] > b[i]){
+                cout << "first" << endl;
+                return 0;
+            }
+        }
+        if(i == min(a.size(), b.size())){
+            if(a.size() != b.size()){
+                cout << ((a.size() > b.size())? "first" : "second") << endl;
+            }else{
+                cout << ((last > 0) ? "first" : "second") << endl;
+            }
+        }        
+    }
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
