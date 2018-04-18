@@ -38,7 +38,20 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-
+    unordered_map<int, int> m;
+    int k = nxt();
+    forn(i, 4) forn(j, 4){
+        char s; cin >> s;
+        if(s == '.') continue;
+        ++m[s - '0'];
+    }
+    for(auto i : m){
+        if(i.se > 2*k){
+            cout << "NO" << endl;
+            return 0;
+        }
+    }
+    cout << "YES" << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

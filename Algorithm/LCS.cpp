@@ -38,7 +38,21 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-
+    string a, b;
+    cin >> a >> b;
+    int n = a.size();
+    int m = b.size();
+    int dp[n + 1][m + 1];
+    FILL(dp, 0);
+    forn(i, n)
+        forn(j, m){
+            if(a[i] == b[j]){
+                dp[i + 1][j + 1] = dp[i][j] + 1;
+            }else{
+                dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j]);
+            }                
+        }
+    cout << dp[n][m] << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
