@@ -15,12 +15,6 @@ using namespace std;
 
 inline int nxt(){ int x; cin >> x; return x; }
 
-template<class T> inline void LOG(T s){
-#ifdef LOCAL_COMPILATION
-    cout << "DEBUG: " << s << endl;
-#endif
-}
-
 typedef pair<int,int> ii;
 typedef vector<int> vi;
 typedef vector<ii> vii;
