@@ -78,6 +78,18 @@ ll sumPF(ll n){
     return ans;
 }
 
+vi d;
+void numOfDivisorFrom1ToN(int n){
+    d.resize(n, 0);
+    for(int i = 2; i < n; i++){
+        if(!d[i]){
+            for(int j = i; j < n; j++){
+                d[j] = d[j / i] + 1;
+            }
+        }
+    }
+}
+
 // formula
 /*
     times all the (power + 1) for each prime factor
