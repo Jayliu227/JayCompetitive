@@ -30,7 +30,19 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-
+    int n = nxt();
+    function<int(int)> phi = [&](int n){
+        int res = n;
+        for(int i = 2; i * i <= n; i++){
+            if(n % i == 0){
+                while(n % i == 0) n /= i;
+                res -= res / i;
+            }
+        }
+        if(n > 1) res -= res / n;
+        return res;
+    };
+    cout << phi(n) << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

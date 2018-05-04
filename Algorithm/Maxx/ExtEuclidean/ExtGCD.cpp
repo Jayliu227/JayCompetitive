@@ -30,7 +30,24 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
+    int a, b;
+    cin >> a >> b;
+    int x, y;
+    
+    function<int(int, int, int&, int&)> exgcd = [&](int a, int b, int& x, int& y){
+        if(b == 0){
+            x = 1, y = 0;
+            return a;
+        }
+        int x1, y1;
+        int d = exgcd(b, a % b, x1, y1);
+        x = y1;
+        y = x1 - (a / b) * y1;
+        return d;
+    };
 
+    int d = exgcd(a, b, x, y);
+    cout << a << " * " << x << " + " << b << " * " << y << " = " << d << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

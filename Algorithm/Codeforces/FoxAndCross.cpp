@@ -30,7 +30,29 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-
+    int n = nxt();
+    vvi grid(n, vi(n));
+    forn(i, n) forn(j, n){
+        char c;
+        cin >> c;
+        grid[i][j] = c == '#';
+    }
+    for(int i = 1; i < n - 1; i++){
+        for(int j = 1; j < n - 1; j++){
+            int sum = 0;
+            sum = grid[i][j] + grid[i + 1][j] + grid[i - 1][j] + grid[i][j - 1] + grid[i][j + 1];
+            if(sum == 5){
+                grid[i][j] = grid[i + 1][j] = grid[i - 1][j] = grid[i][j - 1] = grid[i][j + 1] = 0;
+            }
+        }
+    }
+    int sum = 0;
+    forn(i, n) forn(j, n) sum += grid[i][j];
+    if(sum == 0){
+        cout << "YES" << endl;
+    }else{
+        cout << "NO" << endl;
+    }    
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    

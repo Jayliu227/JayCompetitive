@@ -30,7 +30,19 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-
+    int n = nxt();
+    int a = nxt();
+    function<int(int, int)> exp = [&](int n, int a){
+        int res = 1;
+        while(a){
+            if(a & 1) res = res * n % MODULO;
+            n = n * n % MODULO;
+            a >>= 1;
+        }
+        return res;
+    };
+    
+    cout << exp(n, a) << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
