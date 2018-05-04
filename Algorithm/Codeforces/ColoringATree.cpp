@@ -1,10 +1,9 @@
 #include<bits/stdc++.h>
 
-using namespace std;
-
 #define pb push_back
 #define fi first
 #define se second
+#define mp make_pair
 #define forn(i,n) for(int i = 0; i < (int)n; i++)
 #define for1(i,n) for(int i = 1; i < (int)n; i++)
 #define FILL(x,v) memset(x,v,sizeof(x))
@@ -12,12 +11,15 @@ using namespace std;
 #define RALL(x) (x).rbegin(), (x).rend()
 #define endl '\n'
 
+using namespace std;
+
 inline int nxt(){ int x; cin >> x; return x; }
 
 typedef pair<int,int> ii;
 typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<vi> vvi;
+typedef vector<vii> vvii;
 typedef long long ll;
 
 const int INF = (int) 1e9;
@@ -30,7 +32,29 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-
+    int n = nxt();
+    vi color(n, 0);
+    vvi children(n, vi(0));
+    forn(i, n - 1){
+        int child = i + 2;
+        int parent = nxt();
+        child--, parent--;
+        children[parent].pb(child);
+    }
+    forn(i, n) cin >> color[i];
+    
+    int ans = 0;
+    function<void(int, int)> dfs = [&](int current, int c){
+        if(c != color[current]) ans++, c = color[current];
+        for(int i = 0; i < children[current].size(); i++){
+            dfs(children[current][i], c);
+        }        
+    };
+    
+    if(color[0] != 0) ans++;
+    dfs(0, color[0]);
+    
+    cout << ans << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
