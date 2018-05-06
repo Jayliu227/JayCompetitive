@@ -11,8 +11,6 @@ using namespace std;
 #define ALL(x) (x).begin(), (x).end()
 #define RALL(x) (x).rbegin(), (x).rend()
 #define endl '\n'
-#define debug(x) cerr << #x << " = " << (x) << ";" << endl
-#define debug2(x, y) cerr << #x << " = " << (x) << "; " << #y << " = " << (y) << ";" << endl
 
 inline int nxt(){ int x; cin >> x; return x; }
 
@@ -32,7 +30,18 @@ int main(){
 #ifdef LOCAL_COMPILATION    
     int start_s = clock();
 #endif    
-    
+    ll n;
+    cin >> n;
+    ll current = 2;
+    ll p = 1;
+    ll cnt = 1;
+    while(current < n){
+        ll nw = current;
+        current += p;
+        p = nw;
+        cnt++;        
+    }
+    cout << (current > n ? cnt - 1 : cnt)<< endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
     cerr << "time elapsed: " <<((stop_s - start_s) / double(CLOCKS_PER_SEC)) << "s."<<endl;    
