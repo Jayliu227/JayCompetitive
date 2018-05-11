@@ -30,8 +30,34 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.precision(10);
+
+    ll n, S;
+    cin >> n >> S;
+    vector<ll> a(n);
+    forn(i, n) cin >> a[i];
     
+    ll l = 0, r = n + 1;
+    function<ll(int)> solve = [&](int k){
+        vector<ll> copy(n);
+        for(int i = 0; i < n; i++){
+            copy[i] = a[i] + k * (i * 1LL + 1);
+        }
+        sort(ALL(copy));
+        ll res = 0;
+        for(int i = 0; i < k; i++) res += copy[i];
+        return res;
+    };
     
+    while(l < r - 1){
+        int k = (r + l) / 2;        
+        if(solve(k) <= S){
+            l = k;
+        }else{
+            r = k;
+        }
+    }
+    
+    cout << l << " " << solve(l) << endl;
 #ifdef LOCAL_COMPILATION    
     cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s." << endl;
 #endif    

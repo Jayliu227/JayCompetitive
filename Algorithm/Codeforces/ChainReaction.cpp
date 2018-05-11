@@ -26,12 +26,46 @@ typedef long long ll;
 const int INF = (int) 1e9;
 const int MODULO = (int) 1e9 + 7;
 
+/*
+    use dp: dp[i] means the max # of beacons that won't get
+    destroyed in range [0, i]
+    thus dp[i] = dp[i - 1] + 1 if there is no beacon at ith position
+               = dp[i - range[i] - 1] + 1 if there is a beacon
+    ans = n - max(dp[i]) for all i               
+*/
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.precision(10);
-    
-    
+
+    int n;
+    cin >> n;
+    vii pos;
+    vi range;
+    forn(i, n){
+        int p, r;
+        cin >> p >> r;
+        pos.emplace_back(p, i);        
+        range.push_back(r);
+    }
+    sort(ALL(pos));
+    int ans = n - 1;
+    vi broken(n);
+    broken[0] = n - 1;
+    for(int i = 1; i < n; i++){
+        auto lpos = *lower_bound(pos.begin(), pos.begin() + i, make_pair(pos[i].fi - range[pos[i].se], -1));
+        int index = lower_bound(ALL(pos), lpos) - pos.begin();        
+
+        if(index - 1 >= 0){
+            broken[i] = broken[index - 1] - 1;
+        }else{
+            broken[i] = n - 1;
+        }
+        //debug2(i, broken[i]);
+        chkmin(ans, broken[i]);
+    }
+    cout << ans << endl;
 #ifdef LOCAL_COMPILATION    
     cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s." << endl;
 #endif    

@@ -30,8 +30,31 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.precision(10);
-    
-    
+
+    int n, m, k;
+    cin >> n >> m >> k;
+    map<int, int> ntoi, iton;
+    forn(i, n){
+        int b;
+        cin >> b;
+        ntoi[b] = i + 1;
+        iton[i + 1] = b;
+    }
+    ll ans = 0;
+    forn(i, m){
+        int t;
+        cin >> t;
+        int index = ntoi[t];
+        ans += (ll)(index - 1) / k + 1;        
+        if(index != 1){
+            int prev = iton[index - 1];
+            ntoi[t]--;
+            ntoi[prev]++;
+            iton[index] = prev;
+            iton[index - 1] = t;
+        }
+    }
+    cout << ans << endl;
 #ifdef LOCAL_COMPILATION    
     cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s." << endl;
 #endif    
