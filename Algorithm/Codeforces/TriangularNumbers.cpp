@@ -30,8 +30,16 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.precision(10);
-        
 
+    int x;
+    cin >> x;
+    for(int i = 0; i <= x; i++){
+        if(x == i * (i + 1) / 2){
+            cout << "YES" << endl;
+            return 0;
+        }
+    }
+    cout << "NO" << endl;
 #ifdef LOCAL_COMPILATION    
     cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s." << endl;
 #endif    

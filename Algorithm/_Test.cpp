@@ -26,12 +26,13 @@ typedef long long ll;
 const int INF = (int) 1e9;
 const int MODULO = (int) 1e9 + 7;
 
-int main(){
+int main(int argc, char** argv){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.precision(10);
-        
-
+       
+    
+       
 #ifdef LOCAL_COMPILATION    
     cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s." << endl;
 #endif    

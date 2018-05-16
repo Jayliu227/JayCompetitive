@@ -31,7 +31,16 @@ int main(){
     cin.tie(0);
     cout.precision(10);
         
-
+    ll a, b;
+    cin >> a >> b;
+    ll ans = 0;
+    while(b){
+        ans += a / b;
+        a %= b;
+        swap(a, b);
+    }
+    cout << ans << endl;
+    
 #ifdef LOCAL_COMPILATION    
     cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s." << endl;
 #endif    
