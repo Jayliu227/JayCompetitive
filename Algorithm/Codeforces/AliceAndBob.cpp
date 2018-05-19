@@ -31,6 +31,24 @@ int main(){
     cin.tie(0);
     cout.precision(10);
     
+    int n;
+    cin >> n;
+    int mx = -1;
+    int g;
+    forn(i, n){
+    	int k;
+    	cin >> k;
+    	chkmax(mx, k);
+    	if(i == 0) g = k;
+    	else g = __gcd(g, k);
+    }
 
+    int ans = mx / g - n;
+    if(ans&1){
+    	cout << "Alice" << endl;
+    }else{
+    	cout << "Bob" << endl;
+    }
+    
     return 0;
 }

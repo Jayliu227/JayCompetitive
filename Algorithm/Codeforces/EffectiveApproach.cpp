@@ -30,7 +30,25 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.precision(10);
-    
 
+	int n;
+	cin >> n;
+	map<int, int> m;
+	forn(i, n){
+		int k;
+		cin >> k;
+		m[k] = i;
+	}
+	int q;
+	cin >> q;
+	ll l = 0, r = 0;
+	while(q--){
+		int num;
+		cin >> num;
+		l += (ll)(m[num] + 1);
+		r += (ll)(n - m[num]); 
+	}	
+
+	cout << l << " " << r << endl;
     return 0;
 }
