@@ -51,8 +51,7 @@ int main(){
     while(i < k){
         ans++;
         if(sum(ans)) i++;
-    }            
-    
+    }	              
     cout << ans << endl;
 #ifdef LOCAL_COMPILATION    
     int stop_s = clock();
