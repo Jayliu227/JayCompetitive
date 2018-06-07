@@ -23,13 +23,40 @@ typedef vector<vi> vvi;
 typedef long long ll;
 
 const int INF = (int) 1e9;
+
 const int MOD = (int) 1e9 + 7;
+const int P = 31;
+
+int power[12345];
+int h[12345];
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.precision(10);
     
+    string s;
+    cin >> s;
+    int n = s.size();
+
+    power[0] = 1;
+    for(int i = 1; i < 12345; i++) power[i] = power[i - 1] * P % MOD;
+    h[0] = 0;
+	for(int i = 0; i < n; i++) h[i + 1] = h[i] + (s[i] - 'a' + 1) * power[i] % MOD;
+
+	int cnt = 0;
+	for(int l = 1; l <= n; l++){
+		set<int> s;
+		for(int i = 0; i <= n - l; i++){
+			int cur_h = (h[i + l] + MOD - h[i]) % MOD;
+			cur_h = cur_h * power[n - i - 1];
+			s.insert(cur_h);
+		}
+		cnt += s.size();
+	}
+
+	cout << "# of Distinct Substring of " << s << endl;
+	cout << "is " << cnt << endl;
 
     return 0;
 }
