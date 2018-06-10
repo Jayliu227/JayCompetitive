@@ -24,41 +24,45 @@ typedef long long ll;
 
 const int INF = (int) 1e9;
 const int MOD = (int) 1e9 + 7;
+const int N = 3500;
 
-string s, ok;
-int n, k, b[2000] = {0}; 
-ll h[2000000];
-
-/*
-	use another hash function simply do hs = hs * MOD + s[i];
-*/
+int a[N], cost[N];
+ll dp[N][4];
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.precision(10);
-
-    cin >> s >> ok >> k;
-    n = s.size();
-
-    b[0] = 0;
-    for(int i = 1; i <= n; i++){
-    	b[i] = b[i - 1] + (ok[s[i - 1] - 'a'] - '0' + 1) % 2;
+    
+    int n;
+    cin >> n;
+    for1(i, n + 1){
+    	cin >> a[i];
+    }
+    for1(i, n + 1){
+    	cin >> cost[i];
     }
 
-    ll next = 0;
+    ll res = INF;
+
     for(int i = 1; i <= n; i++){
-    	ll hs = 0;
-    	for(int j = i; j <= n; j++){
-    		if(b[j] - b[i - 1] > k) break;
-    		hs = hs * MOD + s[j - 1];
-    		h[next++] = hs;
+    	dp[i][1] = cost[i];
+    	dp[i][2] = dp[i][3] = INF;
+    	for(int j = 1; j < i; j++) if(a[j] < a[i]) {
+    		dp[i][2] = min(dp[i][2], dp[j][1] + 1LL * cost[i]);
+    	}    	
+    	for(int j = 1; j < i; j++) if(a[j] < a[i]) {
+    		dp[i][3] = min(dp[i][3], dp[j][2] + 1LL * cost[i]);
     	}
+
+    	chkmin(res, dp[i][3]);
     }
 
-    sort(h, h + next);
-    int res = unique(h, h + next) - h;
-    cout << res << endl;
-
+    if(res == INF){
+    	cout << -1 << endl;
+    }else{
+    	cout << res << endl;
+    }
     return 0;
 }
+
