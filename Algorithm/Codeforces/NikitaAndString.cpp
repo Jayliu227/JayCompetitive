@@ -20,12 +20,39 @@ typedef long long ll;
 
 const int INF = (int) 1e9;
 const int MOD = (int) 1e9 + 7;
+const int N = 6000;
+
+string s;
+int n, b[N];
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.precision(10);
     
+    cin >> s;
+    n = s.size();
 
+    b[0] = 0;
+    for(int i = 1; i <= n; i++){
+    	b[i] = b[i - 1] + (s[i - 1] == 'a');
+    }
+
+    int ans = 0;
+    
+    for(int l1 = 0; l1 <= n; l1++){
+    	for(int l2 = 0; l2 + l1 <= n; l2++){
+    		int l3 = n - l1 - l2;
+    		// a1 = [1, l1]
+    		int a1 = b[l1];
+    		// b1 = [l1 + 1, l1 + 1 + l2]
+    		int b1 = l2 - b[l1 + l2] + b[l1];
+    		// a2 = [l1 + l2, n]
+    		int a2 = b[n] - b[l1 + l2];
+    		chkmax(ans, a1 + b1 + a2);
+    	}
+    }
+
+    cout << ans << endl;
     return 0;
 }
