@@ -1,93 +1,93 @@
-#include<bits/stdc++.h>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-#define fi first
-#define se second
-#define forn(i,n) for(int i = 0; i < (int)n; i++)
-#define for1(i,n) for(int i = 1; i < (int)n; i++)
-#define FILL(x,v) memset(x,v,sizeof(x))
-#define ALL(x) (x).begin(), (x).end()
-#define RALL(x) (x).rbegin(), (x).rend()
-#define endl '\n'
-#define debug(x) cerr << #x << " = " << (x) << ";" << endl
-#define debug2(x, y) cerr << #x << " = " << (x) << "; " << #y << " = " << (y) << ";" << endl
-
-template<typename T> inline bool chkmin(T& a, const T& b) { return b < a ? a = b, 1 : 0; }
-template<typename T> inline bool chkmax(T& a, const T& b) { return a < b ? a = b, 1 : 0; }
-
-typedef long long ll;
-
-const int INF = (int) 1e9;
-const int MOD = (int) 1e9 + 7;
-
-vector<int> cal_shifts(string& s){
+vector<int> helper(const string& s){
     int n = s.size();
-    const int alphabet = 256;
-    
-    vector<int> p(n), c(n), cnt(alphabet);
-    for(int i = 0; i < n; i++){
+    const int A = 256;
+
+    vector<int> p(n), c(n), cnt(A);
+    for(int i = 0; i < n; i++)
         cnt[s[i]]++;
-    }
-    for(int i = 1; i < alphabet; i++){
+    for(int i = 1; i < A; i++)
         cnt[i] += cnt[i - 1];
-    }
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i < n; i++)
         p[--cnt[s[i]]] = i;
-    }
     c[p[0]] = 0;
     int classes = 1;
     for(int i = 1; i < n; i++){
-        if(s[p[i]] != s[p[i - 1]]) classes++;
+        if(s[p[i]] != s[p[i - 1]])
+            classes++;
         c[p[i]] = classes - 1;
     }
-    
+
     vector<int> pn(n), cn(n);
     for(int h = 0; (1 << h) < n; h++){
         for(int i = 0; i < n; i++){
             pn[i] = p[i] - (1 << h);
-            if(pn[i] < 0) pn[i] += n;
+            if(pn[i] < 0) 
+                pn[i] += n;
         }
-                
         fill(cnt.begin(), cnt.end(), 0);
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < n; i++)
             cnt[c[pn[i]]]++;
-        }
-        for(int i = 1; i < classes; i++){
+        for(int i = 1; i < classes; i++)
             cnt[i] += cnt[i - 1];
-        }
-        for(int i = n - 1; i >= 0; i--){
+        for(int i = n - 1; i >= 0; i--)
             p[--cnt[c[pn[i]]]] = pn[i];
-        }
-        classes = 1;
+
         cn[p[0]] = 0;
+        classes = 1;
         for(int i = 1; i < n; i++){
+            pair<int, int> prev = make_pair(c[p[i - 1]],c[(p[i - 1] + (1 << h)) % n]);
             pair<int, int> cur = make_pair(c[p[i]], c[(p[i] + (1 << h)) % n]);
-            pair<int, int> prev = make_pair(c[p[i - 1]], c[(p[i - 1] + (1 << h)) % n]);
-            if(cur != prev) classes++;
+            if(cur != prev)
+                classes++;
             cn[p[i]] = classes - 1;
         }
         c.swap(cn);
     }
-    
     return p;
 }
 
-vector<int> suffix_array_construct(string& s){
-    string in = s + '&';
-    vector<int> res = cal_shifts(in);
+vector<int> getSA(const string& s){
+    string in = s + '$';
+    vector<int> res = helper(in);
     res.erase(res.begin());
-    return res;    
+    return res;
+}
+
+vector<int> getLCP(const string& s, vector<int>& sa){
+    int n = s.size();
+    vector<int> rank(n);
+    for(int i = 0; i < n; i++){
+        rank[sa[i]] = i;
+    }
+    int k = 0;
+    vector<int> lcp(n, 0);
+    for(int i = 0; i < n; i++){
+        if(rank[i] == n - 1){
+            k = 0;
+            continue;
+        }
+        int j = sa[rank[i] + 1];
+        while(i + k < n && j + k < n && s[i + k] == s[j + k])
+            k++;
+        lcp[rank[i]] = k;
+        if(k) k--;
+    }
+    return lcp;
 }
 
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.precision(10);
-
-    string s = "aaba";// "dabbb";
-    vector<int> res = suffix_array_construct(s);
-    for(auto i : res) cout << i << " ";   
-
+    string s;
+    cin >> s;
+    vector<int> sa = getSA(s);
+    vector<int> lcp = getLCP(s, sa);
+    int n = s.size();
+    for(int i = 0; i < n; i++){
+        string cur = s.substr(sa[i], n - sa[i]);
+        cout << "sa: " << sa[i] << " lcp: " << lcp[i] << ' ' << cur << endl;
+    }
+    
     return 0;
 }
