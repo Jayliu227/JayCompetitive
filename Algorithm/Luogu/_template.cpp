@@ -4,8 +4,6 @@ using namespace std;
 
 #define fi first
 #define se second
-#define forn(i,n) for(int i = 0; i < (int)n; i++)
-#define for1(i,n) for(int i = 1; i < (int)n; i++)
 #define FILL(x,v) memset(x,v,sizeof(x))
 #define ALL(x) (x).begin(), (x).end()
 #define RALL(x) (x).rbegin(), (x).rend()
