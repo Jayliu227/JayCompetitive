@@ -1,0 +1,2 @@
+"C:\Program Files\Sublime Text 3\subl.exe" "!.!"
+"C:\Program Files (x86)\Vim\vim81\gvim.exe" "!.!"

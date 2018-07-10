@@ -4,8 +4,8 @@ using namespace std;
 int sg[(1 << 20) + 10];
 
 int lb(int x){
-	return x & -x;
-}	
+    return x & -x;
+}   
 
 int a[21];
 int helper(int x){
@@ -17,18 +17,18 @@ int helper(int x){
     int temp;
     // try every remaining chocies
     while(k){
-    	// get the right most untried piece and clean it
-    	t ^= k;
-    	// temp represents the piece pos from which we move it
-    	temp = k;
-    	// k represents the piece pos to which we move it
-    	// we need to find the first k such that when it xor
-    	// with x, it becomes smaller, so only when kth pos at x
-    	// is 0 (since kth is 1);
-    	while((x ^ k) < x) k >>= 1;
-    	// memorize the sg number
-    	a[cnt++] = helper(x ^ temp ^ k);
-    	k = lb(t);
+        // get the right most untried piece and clean it
+        t ^= k;
+        // temp represents the piece pos from which we move it
+        temp = k;
+        // k represents the piece pos to which we move it
+        // we need to find the first k such that when it xor
+        // with x, it becomes smaller, so only when kth pos at x
+        // is 0 (since kth is 1);
+        while((x ^ k) < x) k >>= 1;
+        // memorize the sg number
+        a[cnt++] = helper(x ^ temp ^ k);
+        k = lb(t);
     }
 
     sort(a,a+cnt);
@@ -40,34 +40,34 @@ int helper(int x){
 }
 
 int main(){
-	ios::sync_with_stdio(false);
-	cin.tie(0);
+    ios::sync_with_stdio(false);
+    cin.tie(0);
 
-	memset(sg, -1, sizeof(sg));
-	for(int i = 0; i <= 20; i++){
-		sg[(1 << i) - 1] = 0;
-	}
-	for(int i = 0; i < (1 << 20); i++){
-		if(sg[i] == -1)
-			helper(i);
-	}
+    memset(sg, -1, sizeof(sg));
+    for(int i = 0; i <= 20; i++){
+        sg[(1 << i) - 1] = 0;
+    }
+    for(int i = 0; i < (1 << 20); i++){
+        if(sg[i] == -1)
+            helper(i);
+    }
 
-	int T, n, m, x;
-	cin >> T;
-	while(T--){
-		cin >> n;
-		int ans = 0;
-		for(int i = 0; i < n; i++){
-			cin >> m;
-			int line = 0;
-			for(int j = 0; j < m; j++){
-				cin >> x;
-				line |= (1 << (20 - x));
-			}
-			ans ^= sg[line];
-		}
-		cout << (ans ? "YES" : "NO") << endl;
-	}
+    int T, n, m, x;
+    cin >> T;
+    while(T--){
+        cin >> n;
+        int ans = 0;
+        for(int i = 0; i < n; i++){
+            cin >> m;
+            int line = 0;
+            for(int j = 0; j < m; j++){
+                cin >> x;
+                line |= (1 << (20 - x));
+            }
+            ans ^= sg[line];
+        }
+        cout << (ans ? "YES" : "NO") << endl;
+    }
 
-	return 0;
+    return 0;
 }

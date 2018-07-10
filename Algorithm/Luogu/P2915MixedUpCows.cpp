@@ -1,5 +1,14 @@
 #include<bits/stdc++.h>
 
+/*
+	Try to use binary to represent the set of numbers
+	that we've chosen so far.
+	dp[last][state] represents the number of ways to form
+	such sequence when LAST is the last number we chose and
+	every single bit set on represents the numbers we used,
+	and their relative positions don't matter.
+*/
+
 using namespace std;
 
 #define fi first
